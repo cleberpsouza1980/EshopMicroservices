@@ -4,3 +4,5 @@ global using MediatR;
 global using BuildingBlocks.CORS;
 global using CatalogAPI.Models;
 global using Marten;
+global using CatalogAPI.Exceptions;
+global using FluentValidation;

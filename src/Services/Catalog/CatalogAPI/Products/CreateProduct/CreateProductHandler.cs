@@ -1,13 +1,28 @@
 ﻿
+
 namespace CatalogAPI.Products.CreateProduct
 {
     public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
         : ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
-    internal class CreateProductHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+
+    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    {
+        public CreateProductCommandValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required").MaximumLength(200).WithMessage("Name max size 200");
+            RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
+            RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required").MaximumLength(1000);
+            RuleFor(x => x.ImageFile).NotEmpty().WithMessage("Image file is required").MaximumLength(500);
+            RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price dont 0");
+        }
+    }
+    internal class CreateProductHandler(IDocumentSession session,ILogger<CreateProductHandler> logger)
+        : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
+            logger.LogInformation("CreateProductHandler.Handler with @{Command}");
 
             var product = new Product
             {
@@ -23,7 +38,7 @@ namespace CatalogAPI.Products.CreateProduct
 
             return new CreateProductResult(product.Id);
 
-            
+
         }
     }
 }
