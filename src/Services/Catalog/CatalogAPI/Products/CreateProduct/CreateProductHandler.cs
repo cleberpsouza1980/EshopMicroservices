@@ -17,13 +17,12 @@ namespace CatalogAPI.Products.CreateProduct
             RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price dont 0");
         }
     }
-    internal class CreateProductHandler(IDocumentSession session,ILogger<CreateProductHandler> logger)
+    internal class CreateProductHandler(IDocumentSession session)
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            logger.LogInformation("CreateProductHandler.Handler with @{Command}");
-
+            
             var product = new Product
             {
                 Name = command.Name,
