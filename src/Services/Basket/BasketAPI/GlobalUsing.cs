@@ -1,0 +1,14 @@
+﻿global using BasketAPI.Exceptions;
+global using BasketAPI.Models;
+global using BuildingBlocks.Behavior;
+global using BuildingBlocks.Exceptions.Handler;
+global using BuildingBlocks.CORS;
+global using BasketAPI.Data;
+global using Carter;
+global using MediatR;
+global using Mapster;
+global using FluentValidation;
+global using Marten;
+global using BuildingBlocks.Exceptions;
+global using  Microsoft.Extensions.Caching.Distributed;
+global using System.Text.Json;
