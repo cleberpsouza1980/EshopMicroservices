@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -25,12 +27,36 @@ builder.Services.AddStackExchangeRedisCache(o =>
     o.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
 
+//Grpc Services
+builder.Services.AddGrpcClient<DiscontGRP.DiscountProtoService.DiscountProtoServiceClient>(option =>
+{
+    option.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+});
+
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddHealthChecks()
+    .AddRedis(
+        builder.Configuration.GetConnectionString("Redis")!,
+        name: "Redis Health",
+        timeout: TimeSpan.FromSeconds(3),
+        tags: new[] { "services" })
+    .AddNpgSql(
+        builder.Configuration.GetConnectionString("Database")!,
+        name: "PostgreSQL Health",
+        timeout: TimeSpan.FromSeconds(3),
+        tags: new[] { "services" });
+
 // Add services to the container.
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.MapCarter();
 app.UseExceptionHandler(o => { });
+app.UseHealthChecks("/health",
+    new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions 
+    { 
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 
 app.Run();

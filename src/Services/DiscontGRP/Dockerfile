@@ -12,20 +12,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Services/Basket/BasketAPI/BasketAPI.csproj", "Services/Basket/BasketAPI/"]
-COPY ["BuildingBlocks/BuildingBlocks/BuildingBlocks.csproj", "BuildingBlocks/BuildingBlocks/"]
-RUN dotnet restore "./Services/Basket/BasketAPI/BasketAPI.csproj"
+COPY ["Services/DiscontGRP/DiscontGRP.csproj", "Services/DiscontGRP/"]
+RUN dotnet restore "./Services/DiscontGRP/DiscontGRP.csproj"
 COPY . .
-WORKDIR "/src/Services/Basket/BasketAPI"
-RUN dotnet build "./BasketAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Services/DiscontGRP"
+RUN dotnet build "./DiscontGRP.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Esta fase é usada para publicar o projeto de serviço a ser copiado para a fase final
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./BasketAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./DiscontGRP.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Esta fase é usada na produção ou quando executada no VS no modo normal (padrão quando não está usando a configuração de Depuração)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BasketAPI.dll"]
+ENTRYPOINT ["dotnet", "DiscontGRP.dll"]
