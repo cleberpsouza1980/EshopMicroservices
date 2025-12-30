@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketAPI", "Services\Baske
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discont", "Discont", "{A31D42E0-C9F0-4402-80A9-8250CFFA159B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscontGRP", "Services\DiscontGRP\DiscontGRP.csproj", "{B279DAC9-DF36-47A1-9804-993580EC2AC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscontGRPC", "Services\DiscontGRP\DiscontGRPC.csproj", "{B279DAC9-DF36-47A1-9804-993580EC2AC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
