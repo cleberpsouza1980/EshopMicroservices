@@ -54,7 +54,7 @@ services:
       - ASPNETCORE_HTTPS_PORT=8081
       - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDB;User Id=postgres;Password=postgres
       - ConnectionStrings__Redis=distributedcache:6379
-      - GrpcSettings__DiscountUrl=http://discontgrp:8080  
+      - GrpcSettings__DiscountUrl=https://discontgrp:8082  
     depends_on:
       - basketdb 
       - distributedcache
