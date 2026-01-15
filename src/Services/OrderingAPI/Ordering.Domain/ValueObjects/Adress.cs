@@ -2,6 +2,7 @@
 
 public class Adress
 {
+    public int Id { get; set; }
     public string FirstName { get; } = default!;
     public string LastName { get;  } = default!;
     public string Email { get;  } = default!; 

@@ -2,6 +2,7 @@
 
 public record Payment
 {
+    public int Id { get; set; }
     public string? CardName { get;  } = default!;
     public string CardNumber { get;  } = default!;
     public string Expiration { get;  } = default!;

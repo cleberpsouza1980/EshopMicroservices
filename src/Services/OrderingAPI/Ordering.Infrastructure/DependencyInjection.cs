@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Ordering.Infrastructure;
+﻿namespace Ordering.Infrastructure;
 
 public static class DependencyInjection
 {
@@ -10,8 +7,8 @@ public static class DependencyInjection
         // Register infrastructure services here
         var connectionString = configuration.GetConnectionString("Database");
 
-        //services.AddDbContext<OrderingDbContext>(options =>
-        //    options.UseSqlServer(connectionString));
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString));
 
         //services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
         return services;
