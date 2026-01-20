@@ -21,7 +21,9 @@ public class Order : Aggregate<OrderId>
         private set { }
     }
 
-    public static Order Create(OrderId id, CustumerId custumerId, OrderName orderName, Adress shippingAdress, Adress billingAdress, Payment payment, IEnumerable<OrderItem> items)
+    //public static Order Create(OrderId id, CustumerId custumerId, OrderName orderName, Adress shippingAdress, Adress billingAdress, Payment payment, IEnumerable<OrderItem> items)
+    public static Order Create(OrderId id, CustumerId custumerId, OrderName orderName, Adress shippingAdress, Adress billingAdress, Payment payment)
+
     {
         var order = new Order
         {
