@@ -10,7 +10,6 @@ namespace Ordering.Application
             // Register application services here
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
             return services;
         }
     }
