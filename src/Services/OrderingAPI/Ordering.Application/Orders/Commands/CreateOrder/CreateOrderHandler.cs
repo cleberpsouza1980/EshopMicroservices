@@ -1,0 +1,41 @@
+﻿namespace Ordering.Application.Orders.Commands.CreateOrder;
+
+public class CreateOrderHandler(IApplicationDbContext dbContext) :
+    ICommandHandler<CreateOrderCommand, CreateOrderResult>
+{
+    public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
+    {
+
+        //Create order 
+        //Save to database
+        //Return result
+
+        var order = CreateNewOrder(command.Order);
+
+        dbContext.Orders.Add(order);
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return new CreateOrderResult(order.Id.Value);
+    }
+
+    private Order CreateNewOrder(OrderDto order)
+    {
+        var shippingAddress = Adress.Of(order.ShippingAddress.FirtsName, order.ShippingAddress.LastName, order.ShippingAddress.EmailAddress, order.ShippingAddress.AddressLine, order.ShippingAddress.Country, order.ShippingAddress.State, order.ShippingAddress.ZipCode);
+        var billingAdress = Adress.Of(order.BillingAddress.FirtsName, order.BillingAddress.LastName, order.BillingAddress.EmailAddress, order.BillingAddress.AddressLine, order.BillingAddress.Country, order.BillingAddress.State, order.BillingAddress.ZipCode);
+
+        var newOrder = Order.Create(
+                id: OrderId.Of(Guid.NewGuid()),
+                custumerId: CustomerId.Of(order.CustumerId),
+                orderName: OrderName.Of(order.OrderName),
+                shippingAdress: shippingAddress,
+                billingAdress: billingAdress,
+                payment: Payment.Of(order.Payment.CardName, order.Payment.CardNumber, order.Payment.Expiration, order.Payment.Cvv, order.Payment.PaymentMethod)
+            );
+        
+        foreach (var orderItem in order.OrderItems)
+            newOrder.Add(ProductId.Of(orderItem.ProductId), orderItem.Quantity, orderItem.Price);
+
+        return newOrder;
+    }
+}
+

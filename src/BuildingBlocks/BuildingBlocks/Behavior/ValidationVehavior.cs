@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.CORS;
+﻿using BuildingBlocks.CQRS;
 using FluentValidation;
 using MediatR;
 

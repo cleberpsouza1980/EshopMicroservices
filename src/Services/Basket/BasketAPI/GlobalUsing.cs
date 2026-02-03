@@ -2,7 +2,7 @@
 global using BasketAPI.Models;
 global using BuildingBlocks.Behavior;
 global using BuildingBlocks.Exceptions.Handler;
-global using BuildingBlocks.CORS;
+global using BuildingBlocks.CQRS;
 global using BasketAPI.Data;
 global using Carter;
 global using MediatR;

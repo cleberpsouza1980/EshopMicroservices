@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace BuildingBlocks.CORS
+namespace BuildingBlocks.CQRS
 {
     public interface ICommand : ICommand<Unit>
     {

@@ -2,11 +2,11 @@
 
 public class InitialData
 {
-    public static IEnumerable<Custumer> Custumers =>
-        new List<Custumer>
+    public static IEnumerable<Customer> Custumers =>
+        new List<Customer>
         {
-            Custumer.Create(CustumerId.Of(new Guid("58c49479-ec65-4de2-86e7-033c546291aa")),"mehmet","mehmet@gmail.com"),
-            Custumer.Create(CustumerId.Of(new Guid("189dc8dc-990f-48e0-a37b-e6f2b60b9d7d")),"john","john@gmail.com")
+            Customer.Create(CustomerId.Of(new Guid("58c49479-ec65-4de2-86e7-033c546291aa")),"mehmet","mehmet@gmail.com"),
+            Customer.Create(CustomerId.Of(new Guid("189dc8dc-990f-48e0-a37b-e6f2b60b9d7d")),"john","john@gmail.com")
         };
 
     public static IEnumerable<Product> Products =>
@@ -30,7 +30,7 @@ public class InitialData
 
             var order1 = Order.Create(
                             OrderId.Of(Guid.NewGuid()),
-                            CustumerId.Of(new Guid("58c49479-ec65-4de2-86e7-033c546291aa")),
+                            CustomerId.Of(new Guid("58c49479-ec65-4de2-86e7-033c546291aa")),
                             OrderName.Of("ORD_1"),
                             shippingAdress: address1,
                             billingAdress: address1,
@@ -40,7 +40,7 @@ public class InitialData
 
             var order2 = Order.Create(
                             OrderId.Of(Guid.NewGuid()),
-                            CustumerId.Of(new Guid("189dc8dc-990f-48e0-a37b-e6f2b60b9d7d")),
+                            CustomerId.Of(new Guid("189dc8dc-990f-48e0-a37b-e6f2b60b9d7d")),
                             OrderName.Of("ORD_2"),
                             shippingAdress: address2,
                             billingAdress: address2,
