@@ -6,7 +6,7 @@ public class Adress
     public string FirstName { get; } = default!;
     public string LastName { get;  } = default!;
     public string Email { get;  } = default!; 
-    public string AadressLine { get;  } = default!; 
+    public string AddressLine { get;  } = default!; 
     public string Country { get;  } = default!;
     public string State { get;  } = default!;
     public string ZipCode { get;  } = default!;
@@ -19,7 +19,7 @@ public class Adress
         FirstName = firstName;
         LastName = lastName;
         Email = email;
-        AadressLine = aadressLine;
+        AddressLine = aadressLine;
         Country = country;
         State = state;
         ZipCode = zipCode;

@@ -49,7 +49,7 @@ public class Order : Aggregate<OrderId>
         Payment = payment;
         Status = orderStatus;
 
-        AddDomainEvent(new OrderUpdateEvent(this));
+        AddDomainEvent(new OrderUpdatedEvent(this));
     }
 
     public void Add(ProductId productId,int quantity,decimal price)

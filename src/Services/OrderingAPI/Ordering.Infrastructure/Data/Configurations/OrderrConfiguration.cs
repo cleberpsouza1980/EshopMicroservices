@@ -48,7 +48,7 @@ namespace Ordering.Infrastructure.Data.Configurations
                     adressBuilder.Property(a => a.Email)
                         .HasMaxLength(50)
                         .IsRequired();
-                    adressBuilder.Property(a => a.AadressLine)
+                    adressBuilder.Property(a => a.AddressLine)
                         .HasMaxLength(180)
                         .IsRequired();
                     adressBuilder.Property(a => a.Country)
