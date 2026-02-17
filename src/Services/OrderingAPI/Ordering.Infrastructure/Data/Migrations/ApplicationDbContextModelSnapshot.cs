@@ -18,279 +18,294 @@ namespace Ordering.Infrastructure.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Ordering.Domain.Models.Custumer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("CreatedAt")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime?>("LastModify")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("LastModified")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("LastModifyBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
+                b.HasIndex("Email")
+                    .IsUnique();
 
-                    b.ToTable("Custumers");
-                });
+                b.ToTable("Custumers");
+            });
 
             modelBuilder.Entity("Ordering.Domain.Models.Order", b =>
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<DateTime?>("CreatedAt")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<Guid>("CustumerId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<DateTime?>("LastModified")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Status")
+                    .IsRequired()
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("nvarchar(max)")
+                    .HasDefaultValue("Draft");
+
+                b.Property<decimal>("TotalPrice")
+                    .HasColumnType("decimal(18,2)");
+
+                b.ComplexProperty<Dictionary<string, object>>("BillingAddress", "Ordering.Domain.Models.Order.BillingAddress#Address", b1 =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b1.IsRequired();
 
-                    b.Property<int>("BillingAdressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("CustumerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("LastModify")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifyBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
+                    b1.Property<string>("AddressLine")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Draft");
+                        .HasMaxLength(180)
+                        .HasColumnType("nvarchar(180)");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b1.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.ComplexProperty<Dictionary<string, object>>("OrderName", "Ordering.Domain.Models.Order.OrderName#OrderName", b1 =>
-                        {
-                            b1.IsRequired();
+                    b1.Property<string>("EmailAddress")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)")
-                                .HasColumnName("OrderName");
-                        });
+                    b1.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.ComplexProperty<Dictionary<string, object>>("ShippingAdress", "Ordering.Domain.Models.Order.ShippingAdress#Adress", b1 =>
-                        {
-                            b1.IsRequired();
+                    b1.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                            b1.Property<string>("AadressLine")
-                                .IsRequired()
-                                .HasMaxLength(180)
-                                .HasColumnType("nvarchar(180)");
+                    b1.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                            b1.Property<string>("Country")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)");
-
-                            b1.Property<string>("Email")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)");
-
-                            b1.Property<string>("FirstName")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)");
-
-                            b1.Property<int>("Id")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("LastName")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)");
-
-                            b1.Property<string>("State")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)");
-                        });
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BillingAdressId");
-
-                    b.HasIndex("CustumerId");
-
-                    b.HasIndex("PaymentId");
-
-                    b.ToTable("Orders");
+                    b1.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
                 });
+
+                b.ComplexProperty<Dictionary<string, object>>("OrderName", "Ordering.Domain.Models.Order.OrderName#OrderName", b1 =>
+                {
+                    b1.IsRequired();
+
+                    b1.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("OrderName");
+                });
+
+                b.ComplexProperty<Dictionary<string, object>>("Payment", "Ordering.Domain.Models.Order.Payment#Payment", b1 =>
+                {
+                    b1.IsRequired();
+
+                    b1.Property<string>("CVV")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b1.Property<string>("CardName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b1.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b1.Property<string>("Expiration")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b1.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+                });
+
+                b.ComplexProperty<Dictionary<string, object>>("ShippingAddress", "Ordering.Domain.Models.Order.ShippingAddress#Address", b1 =>
+                {
+                    b1.IsRequired();
+
+                    b1.Property<string>("AddressLine")
+                        .IsRequired()
+                        .HasMaxLength(180)
+                        .HasColumnType("nvarchar(180)");
+
+                    b1.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b1.Property<string>("EmailAddress")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b1.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b1.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b1.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b1.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+                });
+
+                b.HasKey("Id");
+
+                b.HasIndex("CustumerId");
+
+                b.ToTable("Orders");
+            });
 
             modelBuilder.Entity("Ordering.Domain.Models.OrderItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("CreatedAt")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastModify")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("LastModified")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("LastModifyBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("OrderId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("ProductId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                b.Property<int>("Quantity")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
+                b.HasIndex("ProductId");
 
-                    b.ToTable("orderItems");
-                });
+                b.ToTable("OrderItems");
+            });
 
             modelBuilder.Entity("Ordering.Domain.Models.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("CreatedAt")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastModify")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("LastModified")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("LastModifyBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Ordering.Domain.ValueObjects.Adress", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Adress");
-                });
-
-            modelBuilder.Entity("Ordering.Domain.ValueObjects.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Payment");
-                });
+                b.ToTable("Products");
+            });
 
             modelBuilder.Entity("Ordering.Domain.Models.Order", b =>
-                {
-                    b.HasOne("Ordering.Domain.ValueObjects.Adress", "BillingAdress")
-                        .WithMany()
-                        .HasForeignKey("BillingAdressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ordering.Domain.Models.Custumer", null)
-                        .WithMany()
-                        .HasForeignKey("CustumerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ordering.Domain.ValueObjects.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BillingAdress");
-
-                    b.Navigation("Payment");
-                });
+            {
+                b.HasOne("Ordering.Domain.Models.Custumer", null)
+                    .WithMany()
+                    .HasForeignKey("CustumerId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Ordering.Domain.Models.OrderItem", b =>
-                {
-                    b.HasOne("Ordering.Domain.Models.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Ordering.Domain.Models.Order", null)
+                    .WithMany("OrderItems")
+                    .HasForeignKey("OrderId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("Ordering.Domain.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("Ordering.Domain.Models.Product", null)
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Ordering.Domain.Models.Order", b =>
-                {
-                    b.Navigation("OrderItems");
-                });
+            {
+                b.Navigation("OrderItems");
+            });
 #pragma warning restore 612, 618
         }
     }

@@ -1,15 +1,15 @@
 ﻿namespace Ordering.Domain.ValueObjects;
 
-public record CustomerId
+public record CustumerId
 {
     public Guid Value { get; }    
 
-    private CustomerId(Guid value)
+    private CustumerId(Guid value)
     {
         Value = value;
     }
 
-    public static CustomerId  Of(Guid value)
+    public static CustumerId  Of(Guid value)
     {
         ArgumentException.ThrowIfNullOrEmpty(value.ToString());
 
@@ -17,6 +17,6 @@ public record CustomerId
         {
             throw new ArgumentException("CustumerId cannot be empty.");
         }
-        return new CustomerId(value);
+        return new CustumerId(value);
     }
 }

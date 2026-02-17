@@ -14,14 +14,9 @@ public class UpdateOrder : ICarterModule
             var command = request.Adapt<UpdateOrderCommand>();
             var result = await sender.Send(command);
             var response = result.Adapt<UpdateOrderResponse>();
-            if (response.IsSuccess)
-            {
-                return Results.Ok(response);
-            }
-            else
-            {
-                return Results.NotFound();
-            }
+
+            return Results.Ok(response);
+
         }).WithName("UpdateOrder")
         .Produces<UpdateOrderResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)

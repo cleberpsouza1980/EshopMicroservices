@@ -1,19 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObjects;
+﻿namespace Ordering.Infrastructure.Data.Configurations;
 
-namespace Ordering.Infrastructure.Data.Configurations;
-
-public class CustumerConfiguration : IEntityTypeConfiguration<Customer>
+public class CustumerConfiguration : IEntityTypeConfiguration<Custumer>
 {
-    public void Configure(EntityTypeBuilder<Customer> builder)
+    public void Configure(EntityTypeBuilder<Custumer> builder)
     {
         builder.HasKey(c=> c.Id);
         builder.Property(c => c.Id)
             .HasConversion(
                 custumerId => custumerId.Value,
-                dbId => CustomerId.Of(dbId)
+                dbId => CustumerId.Of(dbId)
             );
 
         builder.Property(c => c.Name)

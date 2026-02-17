@@ -8,7 +8,7 @@ public class GetOrdersByCustumerHandler(IApplicationDbContext dbContext) : IQuer
         var orders = await dbContext.Orders
              .Include(o => o.OrderItems)
              .AsNoTracking()
-             .Where(o => o.CustumerId == CustomerId.Of(query.CustumerId))
+             .Where(o => o.CustumerId == CustumerId.Of(query.CustumerId))
              .OrderBy(o => o.OrderName)
              .ToListAsync(cancellationToken);
 

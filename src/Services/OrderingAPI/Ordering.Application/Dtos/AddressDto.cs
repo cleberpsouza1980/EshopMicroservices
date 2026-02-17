@@ -1,7 +1,7 @@
 ﻿namespace Ordering.Application.Dtos;
 
 public record AddressDto(
-    string FirtsName,
+    string FirstName,
     string LastName,
     string EmailAddress,
     string AddressLine,

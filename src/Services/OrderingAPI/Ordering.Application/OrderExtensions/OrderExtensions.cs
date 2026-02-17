@@ -13,23 +13,24 @@ public static class OrderExtensions
              OrderName: order.OrderName.Value,
              ShippingAddress: new AddressDto
              (
-                order.ShippingAdress.FirstName,
-                order.ShippingAdress.LastName,
-                order.ShippingAdress.Email,
-                order.ShippingAdress.AddressLine,
-                order.ShippingAdress.State,
-                order.ShippingAdress.ZipCode,
-                order.ShippingAdress.Country
+                order.ShippingAddress.FirstName,
+                order.ShippingAddress.LastName,
+                order.ShippingAddress.EmailAddress,
+                order.ShippingAddress.AddressLine,
+                order.ShippingAddress.Country,
+                order.ShippingAddress.State,
+                order.ShippingAddress.ZipCode
              ),
              BillingAddress: new AddressDto(
-                order.BillingAdress.FirstName,
-                order.BillingAdress.LastName,
-                order.BillingAdress.Email,
-                order.BillingAdress.AddressLine,
-                order.BillingAdress.State,
-                order.BillingAdress.ZipCode,
-                order.BillingAdress.Country
+                order.BillingAddress.FirstName,
+                order.BillingAddress.LastName,
+                order.BillingAddress.EmailAddress,
+                order.BillingAddress.AddressLine,
+                order.BillingAddress.Country,
+                order.BillingAddress.State,
+                order.BillingAddress.ZipCode
              ),
+             //BillingAddress: new AddressDto(null,null,null,null,null,null,null),
              Payment: new PaymentDto(
                order.Payment.CardName!,
                order.Payment.CardNumber,

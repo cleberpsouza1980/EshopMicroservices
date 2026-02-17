@@ -13,7 +13,7 @@ using Ordering.Infrastructure.Data;
 namespace Ordering.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260115010514_InitialCreate")]
+    [Migration("20260217134717_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -66,7 +66,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("BillingAdressId")
+                    b.Property<int>("BillingAddressId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -84,9 +84,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifyBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
+                   
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -107,11 +105,11 @@ namespace Ordering.Infrastructure.Data.Migrations
                                 .HasColumnName("OrderName");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("ShippingAdress", "Ordering.Domain.Models.Order.ShippingAdress#Adress", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("ShippingAddress", "Ordering.Domain.Models.Order.ShippingAddress#Address", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<string>("AadressLine")
+                            b1.Property<string>("AddressLine")
                                 .IsRequired()
                                 .HasMaxLength(180)
                                 .HasColumnType("nvarchar(180)");
@@ -147,11 +145,9 @@ namespace Ordering.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BillingAdressId");
+                    b.HasIndex("BillingAddressId");
 
-                    b.HasIndex("CustumerId");
-
-                    b.HasIndex("PaymentId");
+                    b.HasIndex("CustumerId");                   
 
                     b.ToTable("Orders");
                 });
@@ -191,7 +187,7 @@ namespace Ordering.Infrastructure.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("orderItems");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Ordering.Domain.Models.Product", b =>
@@ -224,7 +220,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Ordering.Domain.ValueObjects.Adress", b =>
+            modelBuilder.Entity("Ordering.Domain.ValueObjects.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,27 +230,15 @@ namespace Ordering.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Adress");
+                    b.ToTable("Address");
                 });
-
-            modelBuilder.Entity("Ordering.Domain.ValueObjects.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Payment");
-                });
+                       
 
             modelBuilder.Entity("Ordering.Domain.Models.Order", b =>
                 {
-                    b.HasOne("Ordering.Domain.ValueObjects.Adress", "BillingAdress")
+                    b.HasOne("Ordering.Domain.ValueObjects.Address", "BillingAddress")
                         .WithMany()
-                        .HasForeignKey("BillingAdressId")
+                        .HasForeignKey("BillingAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -263,16 +247,9 @@ namespace Ordering.Infrastructure.Data.Migrations
                         .HasForeignKey("CustumerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Ordering.Domain.ValueObjects.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BillingAdress");
-
-                    b.Navigation("Payment");
+                                      
+                    b.Navigation("BillingAddress");
+                    
                 });
 
             modelBuilder.Entity("Ordering.Domain.Models.OrderItem", b =>

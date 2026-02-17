@@ -8,10 +8,9 @@
             var pageIndex = query.PaginationRequest.PageIndex;
             var pageSize = query.PaginationRequest.PageSize;
 
-            var orders = await dbContext.Orders
-                .AsNoTracking()
+            var orders = await dbContext.Orders                
                 .Include(o => o.OrderItems)
-                .OrderByDescending(o => o.OrderName)
+                .OrderByDescending(o => o.OrderName.Value)
                 .Skip(pageIndex * pageSize )
                 .Take(pageSize)                
                 .ToListAsync(cancellationToken);

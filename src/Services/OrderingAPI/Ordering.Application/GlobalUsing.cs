@@ -10,3 +10,4 @@ global using Ordering.Domain.Events;
 global using Microsoft.EntityFrameworkCore;
 global using Ordering.Application.OrderExtensions;
 global using BuildingBlocks.Pagination;
+global using FluentValidation;

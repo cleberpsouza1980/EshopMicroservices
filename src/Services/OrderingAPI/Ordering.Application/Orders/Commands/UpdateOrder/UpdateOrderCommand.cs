@@ -5,7 +5,7 @@ namespace Ordering.Application.Orders.Commands.UpdateOrder;
 public record UpdateOrderCommand(OrderDto Order) : ICommand<UpdateOrderResult>;
 
 
-public record UpdateOrderResult(bool success);
+public record UpdateOrderResult(bool IsSuccess);
 
 
 public class UpdateOrderValidator : AbstractValidator<UpdateOrderCommand>

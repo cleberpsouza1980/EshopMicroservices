@@ -6,10 +6,10 @@ public class Order : Aggregate<OrderId>
 
     public IReadOnlyList<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
-    public CustomerId CustumerId { get; private set; } = default!;
+    public CustumerId CustumerId { get; private set; } = default!;
     public OrderName OrderName { get; private set; } = default!;
-    public Adress ShippingAdress { get; private set; } = default!;
-    public Adress BillingAdress { get; private set; } = default!;
+    public Address ShippingAddress { get; private set; } = default!;
+    public Address BillingAddress { get; private set; } = default!;
     public Payment Payment { get; private set; } = default!;
     public OrderStatus Status { get; private set; } = OrderStatus.Pending;
     public decimal TotalPrice
@@ -22,16 +22,15 @@ public class Order : Aggregate<OrderId>
     }
 
     //public static Order Create(OrderId id, CustumerId custumerId, OrderName orderName, Adress shippingAdress, Adress billingAdress, Payment payment, IEnumerable<OrderItem> items)
-    public static Order Create(OrderId id, CustomerId custumerId, OrderName orderName, Adress shippingAdress, Adress billingAdress, Payment payment)
-
+    public static Order Create(OrderId id, CustumerId custumerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
     {
         var order = new Order
         {
             Id = id,
             CustumerId = custumerId,
             OrderName = orderName,
-            ShippingAdress = shippingAdress,
-            BillingAdress = billingAdress,
+            ShippingAddress = shippingAddress,
+            BillingAddress = billingAddress,
             Payment = payment,
             Status = OrderStatus.Pending
         };
@@ -41,11 +40,11 @@ public class Order : Aggregate<OrderId>
         return order;
     }
 
-    public void Update(OrderName orderName, Adress shippingAddress, Adress billingAdress, Payment payment, OrderStatus orderStatus)
+    public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus orderStatus)
     {
         OrderName = orderName;
-        ShippingAdress = shippingAddress;
-        BillingAdress = billingAdress;
+        ShippingAddress = shippingAddress;
+        BillingAddress = billingAddress;
         Payment = payment;
         Status = orderStatus;
 

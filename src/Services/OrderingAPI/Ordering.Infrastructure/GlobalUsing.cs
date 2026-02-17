@@ -7,3 +7,4 @@ global using Ordering.Domain.ValueObjects;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
 global using Ordering.Domain.Abstractions;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;

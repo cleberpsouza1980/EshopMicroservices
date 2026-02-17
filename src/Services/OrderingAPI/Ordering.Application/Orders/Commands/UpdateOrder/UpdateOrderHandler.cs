@@ -26,14 +26,14 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
 
     private void UpdateOrderWithNewValues(Order order, OrderDto orderDto)
     {
-        var updatedShippingAddress = Adress.Of(orderDto.ShippingAddress.FirtsName, orderDto.ShippingAddress.LastName, orderDto.ShippingAddress.EmailAddress, orderDto.ShippingAddress.AddressLine, orderDto.ShippingAddress.Country, orderDto.ShippingAddress.State, orderDto.ShippingAddress.ZipCode);
-        var updatedBillingAddress = Adress.Of(orderDto.BillingAddress.FirtsName, orderDto.BillingAddress.LastName, orderDto.BillingAddress.EmailAddress, orderDto.BillingAddress.AddressLine, orderDto.BillingAddress.Country, orderDto.BillingAddress.State, orderDto.BillingAddress.ZipCode);
+        var updatedShippingAddress = Address.Of(orderDto.ShippingAddress.FirstName, orderDto.ShippingAddress.LastName, orderDto.ShippingAddress.EmailAddress, orderDto.ShippingAddress.AddressLine, orderDto.ShippingAddress.Country, orderDto.ShippingAddress.State, orderDto.ShippingAddress.ZipCode);
+        var updatedBillingAddress = Address.Of(orderDto.BillingAddress.FirstName, orderDto.BillingAddress.LastName, orderDto.BillingAddress.EmailAddress, orderDto.BillingAddress.AddressLine, orderDto.BillingAddress.Country, orderDto.BillingAddress.State, orderDto.BillingAddress.ZipCode);
         var updatedPayment = Payment.Of(orderDto.Payment.CardName, orderDto.Payment.CardNumber, orderDto.Payment.Expiration, orderDto.Payment.Cvv, orderDto.Payment.PaymentMethod);
 
         order.Update(
             orderName: OrderName.Of(orderDto.OrderName),
             shippingAddress: updatedShippingAddress,
-            billingAdress: updatedBillingAddress,
+            billingAddress: updatedBillingAddress,
             payment: updatedPayment,
             orderStatus: orderDto.Status);
     }

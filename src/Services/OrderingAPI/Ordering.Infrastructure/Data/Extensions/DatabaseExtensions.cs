@@ -42,9 +42,9 @@ public static class DatabaseExtensions
 
     private static async Task SeedCustumerAsync(ApplicationDbContext context)
     {
-        if (!await context.Customers.AnyAsync())
+        if (!await context.Custumers.AnyAsync())
         {
-            await context.Customers.AddRangeAsync(InitialData.Custumers);
+            await context.Custumers.AddRangeAsync(InitialData.Custumers);
             await context.SaveChangesAsync();
         }
     }
