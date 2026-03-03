@@ -1,7 +1,8 @@
 ﻿
 namespace BasketAPI.Data;
 
-public class CachedBasketRepository(IBasketRepository repository, IDistributedCache cache) : IBasketRepository
+public class CachedBasketRepository(IBasketRepository repository, IDistributedCache cache)
+    : IBasketRepository
 {
     public async Task<ShoppingCar> GetBasket(string userName, CancellationToken cancellationToken = default)
     {
@@ -29,7 +30,7 @@ public class CachedBasketRepository(IBasketRepository repository, IDistributedCa
         await repository.DeleteBasket(userName, cancellationToken);
 
         await cache.RemoveAsync(userName, cancellationToken);
-        
+
         return true;
     }
 }

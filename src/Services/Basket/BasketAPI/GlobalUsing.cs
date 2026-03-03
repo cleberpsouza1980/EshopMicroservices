@@ -10,5 +10,11 @@ global using Mapster;
 global using FluentValidation;
 global using Marten;
 global using BuildingBlocks.Exceptions;
-global using  Microsoft.Extensions.Caching.Distributed;
+global using Microsoft.Extensions.Caching.Distributed;
 global using System.Text.Json;
+global using HealthChecks.UI.Client;
+global using BuildingBlocks.Messaging.MassTransit;
+global using BasketAPI.DTOs;
+global using DiscontGRP;
+global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+

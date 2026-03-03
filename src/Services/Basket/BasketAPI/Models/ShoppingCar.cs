@@ -5,7 +5,7 @@
         //public int Id { get; set; }
         public string UserName { get; set; } = default!;
         public List<ShoppingCarItem> Items { get; set; } = new();
-        public double TotalPrice => Items.Sum(x => x.Price * x.Quantity);
+        public decimal TotalPrice => Items.Sum(x => x.Price * x.Quantity);
 
         public ShoppingCar(string userName)
         {

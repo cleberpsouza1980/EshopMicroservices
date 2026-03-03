@@ -1,4 +1,4 @@
-using HealthChecks.UI.Client;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +41,10 @@ builder.Services.AddGrpcClient<DiscontGRP.DiscountProtoService.DiscountProtoServ
     return handler;
 });
 
+//Async comunication service
+builder.Services.AddMessageBroker(builder.Configuration);
+
+//Cross Cutting Services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecks()

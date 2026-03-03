@@ -36,8 +36,8 @@ public class StoreBasketHandler(IBasketRepository repository, DiscontGRP.Discoun
 
             if (coupon != null)
             {
-                item.DiscountValue = coupon.Amount;
-                item.Price -= coupon.Amount;
+                item.DiscountValue = Convert.ToDecimal(coupon.Amount);
+                item.Price -=  Convert.ToDecimal(coupon.Amount);
             }
         }
     }
