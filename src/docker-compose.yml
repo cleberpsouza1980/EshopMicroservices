@@ -31,6 +31,12 @@ services:
     build:
       context: .
       dockerfile: Services/DiscontGRP/Dockerfile
+  
+  orderingapi:
+    image: ${DOCKER_REGISTRY-}orderingapi
+    build:
+      context: .
+      dockerfile: Services/OrderingAPI/OrderingAPI/Dockerfile
 
 volumes:
   postgres_catalog:

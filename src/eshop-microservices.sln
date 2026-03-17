@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingAPI", "Services\Ord
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.Messaging", "BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj", "{5B3DCA11-17D4-419A-AA32-AC91DA70322F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{B8B9E391-A25D-4884-92F4-C1D3D9433C1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGatweway", "YarpApiGatweway\YarpApiGatweway.csproj", "{7A3F56BB-30EB-41AE-B86F-5D1CEC890D3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,10 @@ Global
 		{5B3DCA11-17D4-419A-AA32-AC91DA70322F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3DCA11-17D4-419A-AA32-AC91DA70322F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3DCA11-17D4-419A-AA32-AC91DA70322F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3F56BB-30EB-41AE-B86F-5D1CEC890D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3F56BB-30EB-41AE-B86F-5D1CEC890D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3F56BB-30EB-41AE-B86F-5D1CEC890D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3F56BB-30EB-41AE-B86F-5D1CEC890D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +107,7 @@ Global
 		{151A54B9-D542-46F4-9079-DBAC12F4436D} = {73DA06F5-3698-443C-9253-895CE5E3977C}
 		{D60AF303-4E80-4A6E-9FD3-BF6C03C20AF8} = {73DA06F5-3698-443C-9253-895CE5E3977C}
 		{5B3DCA11-17D4-419A-AA32-AC91DA70322F} = {F24C1E1B-153C-40F5-9F06-E9BE81FF9DFE}
+		{7A3F56BB-30EB-41AE-B86F-5D1CEC890D3D} = {B8B9E391-A25D-4884-92F4-C1D3D9433C1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A900184E-A373-42D8-B462-9EC5BEE22857}
