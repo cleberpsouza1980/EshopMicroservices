@@ -38,8 +38,15 @@ services:
       context: .
       dockerfile: Services/OrderingAPI/OrderingAPI/Dockerfile
 
+  yarpapigatweway:
+    image: ${DOCKER_REGISTRY-}yarpapigatweway
+    build:
+      context: .
+      dockerfile: YarpApiGatweway/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
   
+
 
