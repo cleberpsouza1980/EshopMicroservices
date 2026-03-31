@@ -1,6 +1,6 @@
 ﻿namespace ShoppingWeb.Models.Basket;
 
-public class BasketChecoutModel
+public class BasketCheckoutModel
 {
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; } = default!;
@@ -23,5 +23,5 @@ public class BasketChecoutModel
     public int PaymentMethod { get; set; } = default!;
 }
 
-public record BasketCheckoutRequest(BasketChecoutModel BasketCheckoutDto);
+public record BasketCheckoutRequest(BasketCheckoutModel BasketCheckoutDto);
 public record BasketCheckoutResponse(bool IsSuccess);
