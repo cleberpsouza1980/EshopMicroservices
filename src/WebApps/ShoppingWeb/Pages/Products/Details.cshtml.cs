@@ -52,7 +52,7 @@ namespace ShoppingWeb.Pages.Products
                 //return RedirectToPage("/Cart/Index");
                 // Ou: return RedirectToPage(); // Para ficar na mesma página
 
-                return RedirectToPage("Cart");
+                return RedirectToPage("/Cart/Cart");
             }
             catch (Exception ex)
             {

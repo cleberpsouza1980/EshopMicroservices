@@ -1,0 +1,94 @@
+﻿@page
+@model ShoppingWeb.Pages.Cart.CartModel
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3>Produtos Disponíveis</h3>
+                </div>
+                @* <div class="card-body">
+                    <div class="row">
+                        @foreach (var product in Model.Cart.Items)
+                        {
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@product.ProductName</h5>                                        
+                                        <p class="card-text">
+                                            <strong>Preço: R$ @product.Price.ToString("F2")</strong><br />
+                                            <small>Estoque: @product.Quantity unidades</small>
+                                        </p>
+                                        <form method="post" asp-page-handler="AddToCart">
+                                            <input type="hidden" name="produtoId" value="@product.ProductId" />
+                                            <div class="input-group">
+                                                <input type="number" name="quantidade" value="1" min="1" max="@product.Quantity" class="form-control" style="width: 80px;" />
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="fas fa-cart-plus"></i> Adicionar à Cesta
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div> *@
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>Minha Cesta</h4>
+                </div>
+                <div class="card-body">
+                    @if (!Model.Cart.Items.Any())
+                    {
+                        <p class="text-muted">Sua cesta está vazia</p>
+                    }
+                    else
+                    {
+                        <div class="list-group mb-3">
+                            @foreach (var item in Model.Cart.Items)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-0">@item.ProductName</h6>
+                                            <small>Qtd: @item.Quantity x R$ @item.Price.ToString("F2")</small>
+                                        </div>
+                                        <div class="text-end">
+                                            <strong>R$ 00</strong><br />
+                                            <form method="post" asp-page-handler="Remove" asp-route-productId="@item.ProductId" class="d-inline">
+                                                <input type="hidden" name="produtoId" value="@item.ProductId" />
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash"></i> Remover
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="border-top pt-3">
+                            <h5>Total: R$ 00</h5>
+                            <form method="post" asp-page-handler="ClearCart">
+                                <button type="submit" class="btn btn-warning btn-sm">Limpar Cesta</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+}
