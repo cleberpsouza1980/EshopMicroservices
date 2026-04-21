@@ -68,3 +68,4 @@ namespace ShoppingWeb.Pages.Category
             return RedirectToPage("/Cart/Cart");
         }
     }
+}
